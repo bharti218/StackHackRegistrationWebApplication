@@ -24,7 +24,38 @@ namespace StackHackRegistrationWebApplication.Controllers
         {
             // test commit
             string message = "";
+            bool status = false;
+
+            // model validation
+            if(ModelState.IsValid)
+            {
+                // genertae activation code.
+                user.RegistrationID = Guid.NewGuid();
+
+                // save to database
+                using(StackHackDatabaseEntities dc = new StackHackDatabaseEntities())
+                {
+                    dc.Users.Add(user);
+                    dc.SaveChanges();
+
+                    // send email with registration id.
+
+                }
+            }
+            else
+            {
+                message = "Invalid Request";
+            }
+            ViewBag.Message = message;
+            ViewBag.Status = status;
             return View(user);
+        }
+
+        // implement this.
+        [NonAction]
+        public void SendRegistrationEmail()
+        {
+
         }
     }
 }
