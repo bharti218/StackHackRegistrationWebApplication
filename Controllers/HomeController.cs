@@ -22,6 +22,8 @@ namespace StackHackRegistrationWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Registration(User user)
         {
+            // test commit
+            string message = "";
             return View(user);
         }
     }
