@@ -27,7 +27,6 @@ namespace StackHackRegistrationWebApplication.Models
         public string Mobile { get; set; }
 
         [Display(Name = "ID Card")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Id Card is required")]
         public byte[] IDCard { get; set; }
 
         [Display(Name = "No of tickets")]
