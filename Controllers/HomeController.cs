@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StackHackRegistrationWebApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,15 +11,18 @@ namespace StackHackRegistrationWebApplication.Controllers
     {
         // GET: Home
         // Registration Action
-
-
-        // Registration POST action
+        
         [HttpGet]
         public ActionResult Index()
         {
-            
-
             return View();
+        }
+        // Registration POST action
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Registration(User user)
+        {
+            return View(user);
         }
     }
 }
