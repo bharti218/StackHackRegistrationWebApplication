@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Preview";
+}
+
+<h2>Preview</h2>
+
+
+<h1>Hello Coders</h1>
+<div class="form-horizontal">
+    <hr />
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="FullName" class="control-label col-md-2">Full Name</label>
+            <input type="text" id="FullName" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="Mobile" class="control-label col-md-2">Mobile Number</label>
+            <input type="text" id="Mobile" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="EmailID" class="control-label col-md-2">Email ID</label>
+            <input type="text" id="Email" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="BookingType" class="control-label col-md-2">Booking Type</label>
+            <input type="text" id="BookingType" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="No Of Tickets" class="control-label col-md-2">Tickets</label>
+            <input type="text" id="NoOfTickets" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="IDCard" class="control-label col-md-2">ID Card</label>
+            <img src="" id="user_pic" width="300" height="200" style="border: 1px solid;" />
+        </div>
+    </div>
+</div>
+
+
+
+    @section Scripts{
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <script type="text/javascript">
+
+
+            window.onload = function () {
+                // check if url has preview
+                if (window.location.href.indexOf("preview") > -1) {
+                    var full_name = sessionStorage.getItem('name');
+                    $('#FullName').val(full_name);
+
+                    var mobile = sessionStorage.getItem('mobile');
+                    $('#Mobile').val(mobile);
+
+                    var email = sessionStorage.getItem('email');
+                    $('#Email').val(email);
+
+                    var type = sessionStorage.getItem('type');
+                    var str = "";
+                    if (type == 1) {
+                        str = "Self";
+                    }
+                    else if (type == 2) {
+                        str = "Group"
+                    }
+                    else if (type == 3) {
+                        str = "Corporate"
+                    }
+                    else if (type == 4) {
+                        str = "Others"
+                    }
+
+                    $('#BookingType').val(str);
+
+                    var tickets = sessionStorage.getItem('tickets');
+                    $('#NoOfTickets').val(tickets);
+
+                    var pic = sessionStorage.getItem('pic');
+                    var src = pic;
+                    var image = document.getElementById("user_pic");
+                    image.src = src;
+                }
+            }
+        </script>
+    }

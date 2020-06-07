@@ -38,18 +38,18 @@ namespace StackHackRegistrationWebApplication.Controllers
                     user.IDCard = new byte[img.ContentLength];
                     img.InputStream.Read(user.IDCard, 0, img.ContentLength);
                 }
-                // save to database
+                Session["info"] = user;
                 using (StackHackDatabaseEntities dc = new StackHackDatabaseEntities())
                 {
-                   
                     dc.Users.Add(user);
                     dc.SaveChanges();
-
+                    Console.WriteLine("Session = " + Session["info"].ToString());
                     // send email with registration id.
                     SendRegistrationEmail(user.Email, user.RegistrationID.ToString());
                     message = "Registration is successfully done. Following is your Registration ID : " + user.RegistrationID;
                     status = true;
                 }
+               
             }
             else
             {
@@ -60,7 +60,7 @@ namespace StackHackRegistrationWebApplication.Controllers
             return View(user);
         }
 
-        // implement this.
+
         [NonAction]
         public void SendRegistrationEmail(string email, string regID)
         {
@@ -87,5 +87,9 @@ namespace StackHackRegistrationWebApplication.Controllers
             }) smtp.Send(message);
         }
 
+        public ActionResult Preview()
+        {
+            return View();
+        }
     }
 }
