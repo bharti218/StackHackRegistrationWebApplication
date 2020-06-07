@@ -45,7 +45,7 @@ namespace StackHackRegistrationWebApplication.Controllers
                     dc.SaveChanges();
                     Console.WriteLine("Session = " + Session["info"].ToString());
                     // send email with registration id.
-                    SendRegistrationEmail(user.Email, user.RegistrationID.ToString());
+                    SendRegistrationEmail(user.Email, user.RegistrationID.ToString(), user.FullName);
                     message = "Registration is successfully done. Following is your Registration ID : " + user.RegistrationID;
                     status = true;
                 }
@@ -62,13 +62,18 @@ namespace StackHackRegistrationWebApplication.Controllers
 
 
         [NonAction]
-        public void SendRegistrationEmail(string email, string regID)
+        public void SendRegistrationEmail(string email, string regID, string name)
         {
-            var fromEmail = new MailAddress("bhartisingh5492@gmail.com", "Booking Details");
+           
+            var fromEmail = new MailAddress("youremailaddress", "Booking Details"); // replace youremailaddress with your actual email id.
             var toEmail = new MailAddress(email);
-            var fromEmailPassword = "p@r!huma!21";
-            string subject = "Your Registration for the event is confirmed!";
-            string body = "<br/><br/>You are successfully registered for the event following is your registration ID  " + regID;
+            var fromEmailPassword = "*******"; /// replace here your actual password
+            string subject = "Your Registration for the Gaming Night is confirmed!";
+            string body = "<h2> Thank you " + name+"!"+
+                           "<h3>Join us for some food, fun and games all night. Following is your registration ID  " + regID +
+                          "</h3><h4>Hosted By: Bharti Singh</h4>" +
+                          "<h4>Date: 08-06-2020</h4>" +
+                          "<h4>Venue:My Place</h4>";
             var smtp = new SmtpClient
             {
                 Host = "smtp.gmail.com",
